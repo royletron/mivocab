@@ -1,8 +1,15 @@
 Mivocab::Application.routes.draw do
 
+  resources :objectives do
+    resources :words
+  end
+
+  devise_for :users
+
   root :to => 'pages#home'
 
   match '/about' => 'pages#about'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

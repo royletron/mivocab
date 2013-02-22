@@ -1,0 +1,22 @@
+%p#notice= notice
+.page-header
+  %h1
+    = @objective.english_name
+    %small
+      = @objective.spanish_name
+  = link_to 'Edit', edit_objective_path(@objective)
+-if !@objective.words.blank?
+  %h2 Words:
+  %table.table.table-striped
+    %thead
+      %tr
+        %th English
+        %th Spanish
+        %th Description
+        %th Image
+        %th
+    %tbody
+      =render @objective.words
+%h2 Add Word:
+=render 'words/form'
+

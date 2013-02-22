@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b English:
+  = @word.english
+%p
+  %b Spanish:
+  = @word.spanish
+%p
+  %b Description:
+  = @word.description
+%p
+  %b Objective:
+  = @word.objective
+
+= link_to 'Edit', edit_word_path(@word)
+\|
+= link_to 'Back', words_path

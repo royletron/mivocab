@@ -1,0 +1,11 @@
+%tr
+  %td 
+    =word.english
+  %td 
+    =word.spanish
+  %td 
+    =word.description
+  %td 
+    =image_tag word.image.url(:tiny)
+  %td 
+    =link_to 'Remove', [word.objective, word], :confirm => 'Really remove word?', :method => :delete

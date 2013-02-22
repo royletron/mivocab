@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'devise'
+gem 'paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.

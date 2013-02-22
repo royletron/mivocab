@@ -1,0 +1,11 @@
+= simple_form_for([@objective, @objective.words.build]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :english
+    = f.input :spanish
+    = f.input :description
+    = f.file_field :image
+
+  .form-actions
+    = f.button :submit
