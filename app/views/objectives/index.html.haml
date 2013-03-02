@@ -1,8 +1,9 @@
 %h1 Listing objectives
 
-%table
+%table.table.table-striped
   %tr
-    %th Name
+    %th English
+    %th Spanish
     %th
     %th
     %th
@@ -10,6 +11,7 @@
   - @objectives.each do |objective|
     %tr
       %td= objective.english_name
+      %td= objective.spanish_name
       %td= link_to 'Show', objective
       %td= link_to 'Edit', edit_objective_path(objective)
       %td= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' }

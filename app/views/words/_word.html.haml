@@ -7,5 +7,7 @@
     =word.description
   %td 
     =image_tag word.image.url(:tiny)
-  %td 
+  %td
+    =link_to 'Edit', edit_objective_word_path(word.objective, word)
+  %td
     =link_to 'Remove', [word.objective, word], :confirm => 'Really remove word?', :method => :delete

@@ -1,0 +1,94 @@
+.page-header.visible-desktop
+  %h1
+    =@objective.english_name
+    %small
+      =@objective.spanish_name
+.hidden-desktop
+  %h4
+    =@objective.english_name
+    %small<
+      =@objective.spanish_name
+
+:css
+  .carousel-indicators {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 5;
+    margin: 0;
+    list-style: none;
+  }
+
+  .carousel-indicators li {
+    display: block;
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    text-indent: -999px;
+    background-color: orange;
+    background-color: rgba(255, 165, 0, 0.25);
+    border-radius: 5px;
+  }
+
+  .carousel-indicators .active {
+    background-color: orange;
+  }
+.row
+  .span7
+    #learnCarousel.carousel.slide.well{"data-interval" => "false", :style => "background-color:#fcf8e3"}
+      %ol#learnCarouselIndicators.carousel-indicators
+        -counter = 0
+        -@words.each do |word|
+          %li{:class => ("active" unless word != @words.first), "data-slide-to" => "#{counter}",  "data-target" => "#learnCarousel"}
+          -counter = counter + 1
+      / Carousel items
+      .carousel-inner
+        -@words.each do |word|
+          .item{:class => ("active" unless word != @words.first)}
+            =image_tag word.image.url(:original)
+            .carousel-caption.alert-success
+              %h4 
+                =word.english
+              %p 
+                =word.description
+      / Carousel nav
+      %a.carousel-control.left{"data-slide" => "prev", :href => "#learnCarousel"} ‹
+      %a.carousel-control.right{"data-slide" => "next", :href => "#learnCarousel"} ›
+  .span5
+    .alert{:style => "text-align:center; padding:15px; height:60px"}
+      #show-button
+        %a.btn.btn-large.visible-desktop.btn-warning{:href => "javascript:show()", :style => "margin-top:7px"} Show me the Spanish already!
+        %a.btn.hidden-desktop.btn-warning{:href => "javascript:show()", :style => "margin-top:7px"} Show me the Spanish already!
+      #show-loading{:style => "display:none"}
+        .progress.progress-warning.progress-striped.active{:style => "margin-bottom:10px"}
+          .bar{:style => "width: 100%"}
+        %h3{:style => "margin-top:0px"} Wait a jiffy.
+      #show-spanish{:style => "display:none"}
+:javascript
+  var monitor = [];
+  function show()
+  {
+    var position = $("#learnCarouselIndicators .active").data('slide-to');
+    if(position != null)
+    {
+      $('#show-button').slideUp(0);
+      $('#show-loading').slideDown(0);
+      $.getJSON("../get_word/#{@objective.id}/"+position, function(data) {
+        var spanish = data.spanish_word;
+        var tag = $('<h1>'+spanish+'</h1>');
+        $('#show-spanish').html(tag);
+          $('#show-loading').delay(100).slideUp(100);
+          $('#show-spanish').delay(200).slideDown(300);
+      });
+    }
+  }
+  $('#learnCarousel').bind('slide', function() {
+    $('#show-button').slideDown(0);
+    $('#show-button').addClass('disabled');
+    $('#show-loading').slideUp(0);
+    $('#show-spanish').slideUp(0);
+  });
+  $('#learnCarousel').bind('slid', function() {
+    $('#show-button').removeClass('disabled');
+  });

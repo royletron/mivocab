@@ -10,7 +10,10 @@ Mivocab::Application.routes.draw do
 
   match '/about' => 'pages#about'
 
-
+  match 'learn/:id' => 'learn#show', :as => :learn
+  match '/learn' => 'learn#index'
+  
+  match 'get_word/:objective_id/:word_position' => 'learn#get_word', :as => :get_word
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

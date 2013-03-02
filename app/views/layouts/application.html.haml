@@ -10,10 +10,14 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
-  %body
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
+  %body  
+    .navbar.navbar-fixed-top
+      .navbar-inner
         .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
           = render 'layouts/navigation'
     #main{:role => "main"}
       .container

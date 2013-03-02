@@ -1,0 +1,61 @@
+.page-header
+  %h2
+    =@objective.english_name
+.row
+  .span8
+    .alert.alert-success
+      %button.close{"data-dismiss" => "alert", :type => "button"} ×
+      %i.icon-ok
+      %strong Get in!
+      You are so right.
+
+    .alert.alert-error
+      %button.close{"data-dismiss" => "alert", :type => "button"} ×
+      %i.icon-remove
+      %strong Oh snap!
+      Change a few things up and try submitting again.
+  .span4
+    .row
+      .span2
+        .well.alert-error{:style => "text-align:center"}
+          %h4 Wrong
+          %h1 2
+      .span2
+        .well.alert-success{:style => "text-align:center"}
+          %h4 Right
+          %h1 0
+          
+          
+          
+          .row
+            .span6
+              #english-phrase.alert{:style => "display:none"}
+            .span6
+              #show-button.row{:style => "text-align:center"}
+                %a.btn.btn-large.btn-info{:href => "javascript:show()"} Show me!
+              #spanish-phrase.alert.alert-info{:style => "display:none"}
+
+          :javascript
+            var num_cards = #{@objective.words.count};
+            var current_card = 4;
+            function show(card_to_show)
+            {
+              var card_to_request = card_to_show
+              if(card_to_request == undefined)
+              {
+                card_to_request = current_card;
+              }
+              $.getJSON("../get_word/#{@objective.id}/"+card_to_request, function(data) {
+                var items = [];
+                var english = data.english_word;
+                var image = data.image;
+                var tag = $('<img id="imgtag" class="img-polaroid" src="'+image+'" /><p>'+english+'</p>');
+                $('#english-phrase').html(tag);
+                $("#imgtag").one('load', function() {
+                  $('#english-phrase').slideDown();
+                }).each(function() {
+                  if(this.complete) $(this).load();
+                });
+              });
+            }
+            show();

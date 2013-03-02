@@ -24,7 +24,8 @@ class WordsController < ApplicationController
   # GET /words/new
   # GET /words/new.json
   def new
-    @word = Word.new
+    @objective = Objective.find(params[:id])
+    @word = @objective.words.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,7 +35,8 @@ class WordsController < ApplicationController
 
   # GET /words/1/edit
   def edit
-    @word = Word.find(params[:id])
+    @objective = Objective.find(params[:objective_id])
+    @word = @objective.words.find(params[:id])
   end
 
   # POST /words
@@ -49,10 +51,11 @@ class WordsController < ApplicationController
   # PUT /words/1.json
   def update
     @word = Word.find(params[:id])
+    @objective = Objective.find(params[:objective_id])
 
     respond_to do |format|
       if @word.update_attributes(params[:word])
-        format.html { redirect_to @word, notice: 'Word was successfully updated.' }
+        format.html { redirect_to objective_path(@objective), notice: 'Word was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

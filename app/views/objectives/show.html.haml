@@ -15,8 +15,9 @@
         %th Description
         %th Image
         %th
+        %th
     %tbody
       =render @objective.words
 %h2 Add Word:
-=render 'words/form'
+=render 'words/form', :word => @objective.words.build
 

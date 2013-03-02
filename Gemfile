@@ -7,10 +7,11 @@ gem 'rails', '3.2.11'
 
 gem 'sqlite3'
 gem 'haml-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2.3.0.1'
 gem 'simple_form'
 gem 'devise'
 gem 'paperclip'
+gem 'json_builder'
 
 # Gems used only for assets and not required
 # in production environments by default.

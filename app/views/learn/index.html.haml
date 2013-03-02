@@ -1,0 +1,14 @@
+%h1 You could learn?
+
+%table.table.table-striped
+  %tr
+    %th English
+    %th Spanish
+    %th
+
+  - @objectives.each do |objective|
+    %tr
+      %td= objective.english_name
+      %td= objective.spanish_name
+      %td= link_to 'Learn it!', learn_path(objective)
+

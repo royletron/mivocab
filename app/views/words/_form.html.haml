@@ -1,4 +1,6 @@
-= simple_form_for([@objective, @objective.words.build]) do |f|
+-if @word.nil?
+  -@word = @objective.words.build
+= simple_form_for([@objective, @word]) do |f|
   = f.error_notification
 
   .form-inputs
