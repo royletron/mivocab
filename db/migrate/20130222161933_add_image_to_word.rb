@@ -5,5 +5,5 @@ class AddImageToWord < ActiveRecord::Migration
 
   def self.down
     remove_attachment :words, :image
-  end
+ end
 end
